@@ -3,19 +3,19 @@ services:
   - docker
 
 before_install:
-  - docker build -t kodylaneberry/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t kylestephberry/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true kodylaneberry/react-test npm test -- --coverage
+  - docker run -e CI=true kylestephberry/react-test npm test -- --coverage
 
 after_success:
   # docker build commands
-  - docker build -t kodylaneberry/multi-client ./client
-  - docker build -t kodylaneberry/multi-nginx ./nginx
-  - docker build -t kodylaneberry/multi-server ./server
+  - docker build -t kylestephberry/multi-client ./client
+  - docker build -t kylestephberry/multi-nginx ./nginx
+  - docker build -t kylestephberry/multi-server ./server
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # push images to docker hub
-  - docker push kodylaneberry/multi-client
-  - docker push kodylaneberry/multi-nginx
-  - docker push kodylaneberry/multi-server
+  - docker push kylestephberry/multi-client
+  - docker push kylestephberry/multi-nginx
+  - docker push kylestephberry/multi-server
