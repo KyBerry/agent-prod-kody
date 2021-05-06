@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t kodylaneberry/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true kodylaneberry/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t kodylaneberry/multi-client ./client
+  - docker build -t kodylaneberry/multi-nginx ./nginx
+  - docker build -t kodylaneberry/multi-server ./server
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # push images to docker hub
+  - docker push kodylaneberry/multi-client
+  - docker push kodylaneberry/multi-nginx
+  - docker push kodylaneberry/multi-server
