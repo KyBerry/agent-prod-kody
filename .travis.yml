@@ -9,6 +9,7 @@ script:
   - docker run -e CI=true kodylaneberry/react-test npm test -- --coverage
 
 after_success:
+  # docker build commands
   - docker build -t kodylaneberry/multi-client ./client
   - docker build -t kodylaneberry/multi-nginx ./nginx
   - docker build -t kodylaneberry/multi-server ./server
