@@ -23,10 +23,10 @@ after_success:
 deploy:
   provider: elasticbeanstalk
   region: us-east-2
-  app: agent-prod
-  env: Agentprod-env
+  app: agent-prod-kody-assignment
+  env: Agentprodkodyassignment-env
   bucket_name: elasticbeanstalk-us-east-2-444698935727
-  bucket_path: agent-prod
+  bucket_path: agent-prod-kody-assignment
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
