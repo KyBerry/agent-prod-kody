@@ -19,3 +19,15 @@ after_success:
   - docker push kylestephberry/multi-client
   - docker push kylestephberry/multi-nginx
   - docker push kylestephberry/multi-server
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: agent-prod
+  env: Agentprod-env
+  bucket_name: elasticbeanstalk-us-east-2-444698935727
+  bucket_path: agent-prod
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
